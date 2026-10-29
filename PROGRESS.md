@@ -10,7 +10,7 @@ Handoff между сессиями: проверенное состояние, 
 - Стандартный путь верификации: `npm run lint` && `npm run build` && `npm run test`; поднять: docker compose + db:push/seed + `npm run dev` (полный Compose app — этап E2)
 - Текущая незавершённая фича с наивысшим приоритетом: docker-full-stack
 - Текущий блокер: нет
-- Remote: origin/main; ветка main; E1 закрыт (см. лог сессии 003 / SHA после push)
+- Remote: origin/main; ветка main; push выполнен (`5ba1b83`)
 
 ## Лог сессий
 
@@ -25,6 +25,7 @@ Handoff между сессиями: проверенное состояние, 
   - DoD: `npm run build` OK; `.next/standalone/server.js` на месте
   - Заодно в коммите: архив MVP + регистрация task (сессия 002 без push)
 - Запущенная верификация: `npm run build` — success (Next 15.5.28); standalone `server.js` exists
+- Доставка: commit+push `5ba1b83` на origin/main
 - Известный риск: при SSG без живой БД Prisma warning на findMany; маршруты dynamic, build не падает. Compose app ещё нет (E2)
 - Следующий лучший шаг: исполнить **E2** — сервис `app` в Compose + entrypoint (wait DB → db push → seed → start)
 
