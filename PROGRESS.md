@@ -8,9 +8,9 @@ Handoff между сессиями: проверенное состояние, 
 - Корень репозитория: Next.js приложение Flora (монолит)
 - Стандартный путь старта: по AGENTS.md (sync remote → PROGRESS → FEATURE → exec plan при наличии → автономный цикл; commit+push по DoD этапа); доменные ограничения агента — [docs/convention/index.md](docs/convention/index.md)
 - Стандартный путь верификации: `npm run lint` && `npm run build` && `npm run test`; поднять: docker compose + db:push/seed + `npm run dev`
-- Текущая незавершённая фича с наивысшим приоритетом: flower-shop-mvp (реализация E1–E7 сделана; доказательства DoD в FEATURE — на проверке/закрытии)
+- Текущая незавершённая фича с наивысшим приоритетом: нет (flower-shop-mvp статус `готово` в FEATURE)
 - Текущий блокер: нет (ключи ЮKassa/СДЭК/Яндекс опциональны — mock/seed)
-- Remote: origin/main
+- Remote: origin/main; ветка main; push выполнен (`6268180`)
 
 ## Лог сессий
 
@@ -27,4 +27,4 @@ Handoff между сессиями: проверенное состояние, 
   - История заказов, florist UI
 - Запущенная верификация: lint OK; build OK; vitest 3/3; smoke-order.ts ok; HTTP 200 home/catalog/product; pickup-points API
 - Известный риск: без реальных ключей — mock оплата и seed ПВЗ; карта без `NEXT_PUBLIC_YANDEX_MAPS_API_KEY` — список
-- Следующий лучший шаг: выдать ключи интеграций для prod; закрыть FEATURE DoD гейты / completed+ranking при полной приёмке; либо UI-полировка по refs
+- Следующий лучший шаг: выдать ключи ЮKassa/СДЭК/Яндекс для боевого режима; при желании перенести plan в completed/ranking; UI-полировка по refs
