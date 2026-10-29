@@ -82,9 +82,9 @@ sync с remote (шаг 0 старта)
 
 ## Тест работоспособности приложения
 
-- Поднять приложение: ;
-- Прогнать тесты: ;
-- Верификация: .
+- Поднять приложение: `docker compose up -d` && `npm run db:push` && `npm run db:seed` && `npm run dev`
+- Прогнать тесты: `npm run test`
+- Верификация: `npm run lint` && `npm run build`
 
 ## Definition of Done
 

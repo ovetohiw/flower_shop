@@ -1,24 +1,41 @@
-# template_for_ai
+# Flora — магазин цветов
 
-Шаблон процесса AI-разработки: одна активная фича, exec plans, доказательства готовности, оценка закрытой работы.
+Интернет-магазин букетов (РФ/СНГ): витрина, регистрация клиентов, корзина, оплата ЮKassa, самовывоз в ПВЗ СДЭК на Яндекс.Картах.
 
-Карта документов ниже. Команды запуска и проверки — в [AGENTS.md](AGENTS.md), когда заполнены.
+## Стек
 
-## Карта документов
+См. [STACK.md](STACK.md): Next.js (TypeScript) · Tailwind · Prisma · PostgreSQL · Auth.js.
+
+## Быстрый старт
+
+```bash
+cp .env.example .env
+docker compose up -d
+npm install
+npm run db:push
+npm run db:seed
+npm run dev
+```
+
+Откройте http://localhost:3000
+
+Переменные окружения — `.env.example`. Без ключей ЮKassa работает mock (`YOOKASSA_MOCK=1`); без СДЭК — seed ПВЗ; без ключа Яндекс.Карт — выбор из списка.
+
+## Документы процесса
 
 | Путь | Роль |
 |------|------|
-| [AGENTS.md](AGENTS.md) | Операционка агента: sync на старте, автономный цикл этапа (soft/hard, commit+push по DoD этапа), DoD (схема + жёсткие гейты), слоты verify |
-| [PROGRESS.md](PROGRESS.md) | Handoff сессии: блокер, следующий шаг, лог |
-| [FEATURE.md](FEATURE.md) | Контракт одной активной фичи + структурированные доказательства DoD |
-| [PLANS.md](PLANS.md) | Политика: когда нужен exec plan, где живёт, как закрывать |
-| [STACK.md](STACK.md) | Выбранный стэк технологий |
-| [docs/exec-plans/](docs/exec-plans/index.md) | Шаблоны планов, старт исполнения, архив completed |
-| [docs/exec-plans/ranking/](docs/exec-plans/ranking/index.md) | Оценка A–D каждой закрытой работы |
-| [refs/](refs/README.md) | Визуальные референсы UI (пусто допустимо) |
-| [docs/convention/](docs/convention/index.md) | Доменные ограничения для AI-агента (хаб + SECURITY, TEST, DEVELOPMENT, UI, …) |
+| [AGENTS.md](AGENTS.md) | Операционка агента и слоты verify |
+| [PROGRESS.md](PROGRESS.md) | Handoff сессии |
+| [FEATURE.md](FEATURE.md) | Контракт активной фичи |
+| [PLANS.md](PLANS.md) | Политика exec plans |
+| [STACK.md](STACK.md) | Выбранный стэк |
+| [docs/exec-plans/](docs/exec-plans/index.md) | Планы и архив |
+| [docs/convention/](docs/convention/index.md) | Доменные ограничения агента |
+| [refs/](refs/README.md) | Визуальные референсы UI |
 
-## Старт
+## Команды
 
-1. Для агента — чеклист в [AGENTS.md](AGENTS.md).
-2. Для человека — заполните STACK, команды в AGENTS, затем работайте через FEATURE / PLANS.
+- `npm run dev` — разработка
+- `npm run lint` / `npm run build` / `npm run test` — проверки
+- `npm run db:seed` — каталог букетов
