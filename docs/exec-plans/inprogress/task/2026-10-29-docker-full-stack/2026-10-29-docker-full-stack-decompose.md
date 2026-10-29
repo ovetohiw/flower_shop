@@ -59,13 +59,13 @@
   - финальную полировку README (E3), кроме критичных env для compose
 - DoD этапа:
   - Ожидаемый результат: `docker compose up --build -d` поднимает db+app; HTTP 200 на `http://localhost:3000/`
-  - Команда / проверка: `docker compose up --build -d` ; curl/Invoke-WebRequest `/`
-  - Результат прогона: (заполнить при исполнении)
-  - Артефакт: docker-compose.yml; entrypoint; логи контейнера app
+  - Команда / проверка: `docker compose up --build -d` ; `Invoke-WebRequest http://localhost:3000/`
+  - Результат прогона: app Up; HTTP 200; логи: db push sync, `Seeded 8 products`, Next Ready
+  - Артефакт: `docker-compose.yml`; `docker/entrypoint.sh`; `Dockerfile` (/prisma-tools); `docker compose logs app`
 - Статус:
   - [ ] в очереди
   - [ ] в работе
-  - [ ] готово
+  - [x] готово
 
 ## Этап E3: Документация и закрытие DoD фичи
 

@@ -34,16 +34,17 @@
 
 - Ключевые файлы и границы модулей:
   - [next.config.ts](../../../../next.config.ts) — `output: 'standalone'`
-  - `Dockerfile`, `.dockerignore` (новые) — образ app
+  - `Dockerfile`, `.dockerignore` — образ app
   - [docker-compose.yml](../../../../docker-compose.yml) — сервисы `db` + `app`
-  - entrypoint-скрипт (новый, рядом с Docker) — wait / prisma / seed / start
-  - [.env.example](../../../../.env.example) — `DATABASE_URL` для хоста `db` в compose-сети
-  - [README.md](../../../../README.md), [STACK.md](../../../../STACK.md), [AGENTS.md](../../../../AGENTS.md) — путь старта
+  - [docker/entrypoint.sh](../../../../docker/entrypoint.sh) — wait / prisma / seed / start
+  - `/prisma-tools` в образе — полный node_modules для CLI prisma + seed.cjs
+  - [.env.example](../../../../.env.example) — host `localhost`; Compose задаёт URL на `db`
+  - [README.md](../../../../README.md), [STACK.md](../../../../STACK.md), [AGENTS.md](../../../../AGENTS.md) — путь старта (E3)
 - Контракты поведения (ссылка на FEATURE, не копия ТЗ): FEATURE.md → `docker-full-stack`
 - Принятые решения по реализации:
   - Multi-stage: deps → build → runner; старт `node server.js` из standalone
   - Схема: `prisma db push` (нет `prisma/migrations`)
-  - Seed идемпотентный или флаг env; mock-интеграции по умолчанию
+  - Seed: `SEED_ON_START=1` по умолчанию; upsert идемпотентен; `prisma/seed.cjs` через esbuild
   - Код приложения не монтируется volume’ом в prod-like Compose
 - Ограничения стэка / конвенций, влияющие на этапы:
   - STACK: Docker + Docker Compose уже отмечены
@@ -53,7 +54,7 @@
 
 Один этап. Id из decompose.
 
-- Этап id: E2
+- Этап id: E3
 - Статус: в очереди
 
 ## Путь верификации
@@ -71,6 +72,11 @@
 
 ## Лог прогресса
 
+- Сессия 004 (2026-10-29):
+  - Этап id: E2
+  - Сделано: сервис `app` + healthcheck db; `docker/entrypoint.sh`; `/prisma-tools` для CLI; `SEED_ON_START`; `public/.gitkeep`; compose up → HTTP 200; handoff на E3
+  - Осталось: E3 (docs + FEATURE DoD)
+
 - Сессия 003 (2026-10-29):
   - Этап id: E1
   - Сделано: `output: "standalone"`; multi-stage Dockerfile; `.dockerignore`; `npm run build` зелёный; handoff на E2
@@ -83,4 +89,5 @@
 
 ## Открытые решения
 
-- Seed на каждый старт vs `SEED_ON_START=1` — soft: выбрать идемпотентный seed или флаг на E2
+- Seed: `SEED_ON_START=1` по умолчанию + идемпотентный upsert (закрыто на E2)
+- Образ тяжелее из‑за `/prisma-tools` (полный npm ci) — приемлемо для task; slim CLI — вне скоупа

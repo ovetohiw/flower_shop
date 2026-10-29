@@ -10,6 +10,35 @@ services:
       - "5432:5432"
     volumes:
       - flower_pg_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U flower -d flower_shop"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  app:
+    build: .
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - "3000:3000"
+    environment:
+      DATABASE_URL: postgresql://flower:flower@db:5432/flower_shop?schema=public
+      AUTH_SECRET: ${AUTH_SECRET:-dev-compose-secret-change-me}
+      AUTH_URL: ${AUTH_URL:-http://localhost:3000}
+      YOOKASSA_MOCK: ${YOOKASSA_MOCK:-1}
+      YOOKASSA_RETURN_URL: ${YOOKASSA_RETURN_URL:-http://localhost:3000/checkout/result}
+      YOOKASSA_SHOP_ID: ${YOOKASSA_SHOP_ID:-}
+      YOOKASSA_SECRET_KEY: ${YOOKASSA_SECRET_KEY:-}
+      CDEK_CLIENT_ID: ${CDEK_CLIENT_ID:-}
+      CDEK_CLIENT_SECRET: ${CDEK_CLIENT_SECRET:-}
+      CDEK_API_URL: ${CDEK_API_URL:-https://api.edu.cdek.ru/v2}
+      NEXT_PUBLIC_YANDEX_MAPS_API_KEY: ${NEXT_PUBLIC_YANDEX_MAPS_API_KEY:-}
+      SEED_ON_START: ${SEED_ON_START:-1}
+      DB_HOST: db
+      DB_PORT: "5432"
 
 volumes:
   flower_pg_data:
