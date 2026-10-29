@@ -10,7 +10,7 @@ Handoff между сессиями: проверенное состояние, 
 - Стандартный путь верификации: `npm run lint` && `npm run build` && `npm run test`; Compose: HTTP 200 `/`
 - Текущая незавершённая фича с наивысшим приоритетом: docker-full-stack (E2 готово → E3)
 - Текущий блокер: нет
-- Remote: origin/main; ветка main; push E2 — см. лог сессии 004
+- Remote: origin/main; ветка main; push выполнен ($sha)
 
 ## Лог сессий
 
@@ -24,7 +24,7 @@ Handoff между сессиями: проверенное состояние, 
   - Dockerfile: `/prisma-tools` (полный node_modules для CLI), esbuild `seed.cjs`, `public/.gitkeep`
   - Soft: `SEED_ON_START=1` по умолчанию (upsert идемпотентен)
 - Запущенная верификация: `docker compose up --build -d` → HTTP 200 `/`; логи: Seeded 8 products, Next Ready
-- Доставка: commit+push (SHA в этом блоке после push)
+- Доставка: commit+push $sha на origin/main
 - Известный риск: образ больше из‑за `/prisma-tools`; порт 3000 на хосте должен быть свободен
 - Следующий лучший шаг: исполнить **E3** — README/`.env.example`/доказательства DoD в FEATURE
 
