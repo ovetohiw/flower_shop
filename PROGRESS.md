@@ -10,7 +10,7 @@ Handoff между сессиями: проверенное состояние, 
 - Стандартный путь верификации: `npm run lint` && `npm run build` && `npm run test`
 - Текущая незавершённая фича с наивысшим приоритетом: нет (`docker-full-stack` статус `готово`)
 - Текущий блокер: нет
-- Remote: origin/main; ветка main; E3 закрыт — SHA после push в логе сессии 005
+- Remote: origin/main; ветка main; push выполнен (`26d81a0`)
 
 ## Лог сессий
 
@@ -25,7 +25,7 @@ Handoff между сессиями: проверенное состояние, 
   - FEATURE доказательства DoD; статус `готово`
   - completed + ranking B; inprogress task снят
 - Запущенная верификация: `npm run lint` OK; `npm run build` OK; Compose HTTP 200 `/`
-- Доставка: commit+push (SHA после push)
+- Доставка: commit+push `26d81a0` на origin/main
 - Известный риск: `/prisma-tools` увеличивает образ; :3000 должен быть свободен
 - Следующий лучший шаг: по желанию — slim Prisma в образе / боевые ключи интеграций / UI по refs
 
