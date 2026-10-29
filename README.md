@@ -4,22 +4,38 @@
 
 ## Стек
 
-См. [STACK.md](STACK.md): Next.js (TypeScript) · Tailwind · Prisma · PostgreSQL · Auth.js.
+См. [STACK.md](STACK.md): Next.js (TypeScript) · Tailwind · Prisma · PostgreSQL · Auth.js · Docker Compose.
 
-## Быстрый старт
+## Быстрый старт (Docker, app + БД)
 
 ```bash
 cp .env.example .env
-docker compose up -d
+# при необходимости задайте AUTH_SECRET в .env — Compose подхватит его для сервиса app
+docker compose up --build -d
+```
+
+Откройте http://localhost:3000
+
+При старте контейнер `app`: ждёт Postgres → `prisma db push` → seed каталога (`SEED_ON_START=1` по умолчанию) → Next.js standalone.
+
+Остановка: `docker compose down`
+
+Переменные — [`.env.example`](.env.example). Без ключей ЮKassa работает mock (`YOOKASSA_MOCK=1`); без СДЭК — seed ПВЗ; без ключа Яндекс.Карт — выбор из списка.
+
+## Разработка на хосте (опционально)
+
+Нужны Node.js и поднятая БД (можно только `docker compose up -d db`):
+
+```bash
+cp .env.example .env
+docker compose up -d db
 npm install
 npm run db:push
 npm run db:seed
 npm run dev
 ```
 
-Откройте http://localhost:3000
-
-Переменные окружения — `.env.example`. Без ключей ЮKassa работает mock (`YOOKASSA_MOCK=1`); без СДЭК — seed ПВЗ; без ключа Яндекс.Карт — выбор из списка.
+В `.env` для хоста: `DATABASE_URL` с хостом `localhost` (не `db`).
 
 ## Документы процесса
 
@@ -36,6 +52,7 @@ npm run dev
 
 ## Команды
 
-- `npm run dev` — разработка
-- `npm run lint` / `npm run build` / `npm run test` — проверки
-- `npm run db:seed` — каталог букетов
+- `docker compose up --build -d` — полный стек (app + Postgres)
+- `npm run dev` — разработка на хосте
+- `npm run lint` / `npm run build` / `npm run test` — проверки на хосте
+- `npm run db:seed` — каталог букетов (хост)

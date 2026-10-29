@@ -229,7 +229,7 @@
 - Качество кода: ESLint
 - Сборка: npm
 - CI/CD: —
-- Хостинг: Docker Compose (локальная БД)
+- Хостинг: Docker Compose (app + Postgres; локальный/self-hosted)
 - Наблюдаемость: —
 - Документация API: —
 - Интеграции: ЮKassa, СДЭК API, Яндекс.Карты JS API

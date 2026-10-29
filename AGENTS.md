@@ -82,7 +82,7 @@ sync с remote (шаг 0 старта)
 
 ## Тест работоспособности приложения
 
-- Поднять приложение: `docker compose up -d` && `npm run db:push` && `npm run db:seed` && `npm run dev`
+- Поднять приложение: `docker compose up --build -d` (app + Postgres; schema/seed в entrypoint). Хост-dev: `docker compose up -d db` && `npm run db:push` && `npm run db:seed` && `npm run dev`
 - Прогнать тесты: `npm run test`
 - Верификация: `npm run lint` && `npm run build`
 

@@ -110,5 +110,6 @@
 
 Новые записи сверху.
 
+- [2026-10-29-docker-full-stack](./2026-10-29-docker-full-stack/) — task — полный Compose: app + Postgres, entrypoint schema/seed
 - [2026-10-29-flower-shop](./2026-10-29-flower-shop/) — big-task — MVP Flora: каталог, auth, корзина, ПВЗ, ЮKassa mock, ЛК
 - <!-- пример: [2026-10-29-short-topic](./2026-10-29-short-topic/) — тип, одно предложение итога -->
